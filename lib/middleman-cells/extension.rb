@@ -3,6 +3,7 @@ require 'middleman-core'
 module Middleman
   module Cells
     class Extension < ::Middleman::Extension
+      option :cells_dir, 'cells', 'Directory where to place cells'
       option :autoload, true, 'Whether to autoload cells or not'
 
       def initialize(app, options_hash={}, &block)
@@ -15,7 +16,7 @@ module Middleman
       end
 
       def after_configuration
-        cells_dir = File.join(app.root, app.config[:source], 'cells')
+        cells_dir = File.join(app.root, app.config[:source], options.cells_dir)
 
         ::Cell::ViewModel.view_paths << cells_dir
 

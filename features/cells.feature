@@ -4,3 +4,8 @@ Feature: Cells support for Middleman
     Given the Server is running at "basic-app"
     When I go to "/index.html"
     Then I should see "Hello."
+
+  Scenario: Cells in non-default directory
+    Given the Server is running at "non-default-dir-app"
+    When I go to "/index.html"
+    Then I should see "Hello from non-default directory."
