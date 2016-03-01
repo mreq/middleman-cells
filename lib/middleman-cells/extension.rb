@@ -3,6 +3,8 @@ require 'middleman-core'
 module Middleman
   module Cells
     class Extension < ::Middleman::Extension
+      option :autoload, true, 'Whether to autoload cells or not'
+
       def initialize(app, options_hash={}, &block)
         super
 
@@ -13,10 +15,14 @@ module Middleman
       end
 
       def after_configuration
-        root_path = app.root_path
-        cells_dir = File.join(app.config[:source], 'cells')
+        cells_dir = File.join(app.root, app.config[:source], 'cells')
 
-        ::Cell::ViewModel.view_paths << root_path + cells_dir
+        ::Cell::ViewModel.view_paths << cells_dir
+
+        if options.autoload
+          require 'active_support/dependencies'
+          ::ActiveSupport::Dependencies.autoload_paths << cells_dir
+        end
       end
     end
   end
