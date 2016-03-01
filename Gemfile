@@ -12,7 +12,7 @@ group :development do
 end
 
 group :test do
-  gem 'cucumber'
-  gem 'aruba'
-  gem 'rspec'
+  gem 'cucumber', '~> 2.0.0'
+  gem 'aruba', '~> 0.7.4'
+  gem 'rspec', '~> 3.0.0'
 end
