@@ -7,18 +7,16 @@ module Middleman
         super
 
         require 'cells'
+        yield if block_given? # Expect to require template engines (like cells-erb).
+
+        ::Cell::ViewModel.send(:include, ::Cell::Erb) if defined?(::Cell::Erb)
       end
 
       def after_configuration
         root_path = app.root_path
         cells_dir = File.join(app.config[:source], 'cells')
 
-        ::Cell::ViewModel.class_eval do
-          require 'cells-erb' # FIXME
-          include ::Cell::Erb # FIXME
-
-          self.view_paths << root_path + cells_dir
-        end
+        ::Cell::ViewModel.view_paths << root_path + cells_dir
       end
     end
   end
