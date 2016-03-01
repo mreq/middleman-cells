@@ -1,31 +1,25 @@
-# Require core library
 require 'middleman-core'
 
-# Extension namespace
-class MyExtension < ::Middleman::Extension
-  option :my_option, 'default', 'An example option'
+module Middleman
+  module Cells
+    class Extension < ::Middleman::Extension
+      def initialize(app, options_hash={}, &block)
+        super
 
-  def initialize(app, options_hash={}, &block)
-    # Call super to build options from the options_hash
-    super
+        require 'cells'
+      end
 
-    # Require libraries only when activated
-    # require 'necessary/library'
+      def after_configuration
+        root_path = app.root_path
+        cells_dir = File.join(app.config[:source], 'cells')
 
-    # set up your extension
-    # puts options.my_option
+        ::Cell::ViewModel.class_eval do
+          require 'cells-erb' # FIXME
+          include ::Cell::Erb # FIXME
+
+          self.view_paths << root_path + cells_dir
+        end
+      end
+    end
   end
-
-  def after_configuration
-    # Do something
-  end
-
-  # A Sitemap Manipulator
-  # def manipulate_resource_list(resources)
-  # end
-
-  # helpers do
-  #   def a_helper
-  #   end
-  # end
 end

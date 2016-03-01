@@ -1,6 +1,6 @@
-require "middleman-core"
+require 'middleman-core'
 
 Middleman::Extensions.register :cells do
-  require "my-extension/extension"
-  MyExtension
+  require 'middleman-cells/extension'
+  Middleman::Cells::Extension
 end
