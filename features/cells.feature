@@ -20,3 +20,14 @@ Feature: Cells support for Middleman
     Then I should see "Item #1"
     Then I should see "Item #2"
     Then I should see "Item #3"
+
+  Scenario: Edit and reload
+    Given the Server is running at "reload-app"
+    When I go to "/index.html"
+    Then I should see "Before"
+    And a file named "source/cells/reload/show.erb" with:
+      """
+      <p>After</p>
+      """
+    When I go to "/index.html"
+    Then I should see "After"

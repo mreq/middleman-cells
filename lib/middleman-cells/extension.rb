@@ -25,6 +25,11 @@ module Middleman
           require 'active_support/dependencies'
           ::ActiveSupport::Dependencies.autoload_paths << cells_dir
         end
+
+        if app.config[:environment] == :development
+          require 'cell/development'
+          ::Cell::ViewModel.send(:include, ::Cell::Development)
+        end
       end
 
       helpers do
