@@ -31,3 +31,13 @@ Feature: Cells support for Middleman
       """
     When I go to "/index.html"
     Then I should see "After"
+
+  Scenario: Hamlit support
+    Given the Server is running at "hamlit-app"
+    When I go to "/index.html"
+    Then I should see "<p>This is a Hamlit.</p>"
+
+  Scenario: Haml support
+    Given the Server is running at "haml-app"
+    When I go to "/index.html"
+    Then I should see "<p>This is a Haml.</p>"

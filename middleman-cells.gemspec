@@ -19,7 +19,4 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'middleman-core', '~> 4.0'
   s.add_runtime_dependency 'cells', '~> 4.0.0'
   s.add_runtime_dependency 'activesupport', '~> 4.2.0'
-
-  s.add_development_dependency 'cells-erb'
-  s.add_development_dependency 'hashie'
 end

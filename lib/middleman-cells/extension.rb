@@ -14,6 +14,8 @@ module Middleman
         yield if block_given? # Expect to require template engines (like cells-erb).
 
         ::Cell::ViewModel.send(:include, ::Cell::Erb) if defined?(::Cell::Erb)
+        ::Cell::ViewModel.send(:include, ::Cell::Hamlit) if defined?(::Cell::Hamlit)
+        ::Cell::ViewModel.send(:include, ::Cell::Haml) if defined?(::Cell::Haml)
       end
 
       def after_configuration
