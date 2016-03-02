@@ -10,6 +10,7 @@ module Middleman
         super
 
         require 'cells'
+        require 'active_support/inflector'
         yield if block_given? # Expect to require template engines (like cells-erb).
 
         ::Cell::ViewModel.send(:include, ::Cell::Erb) if defined?(::Cell::Erb)
@@ -23,6 +24,13 @@ module Middleman
         if options.autoload
           require 'active_support/dependencies'
           ::ActiveSupport::Dependencies.autoload_paths << cells_dir
+        end
+      end
+
+      helpers do
+        # Refer to Cell::ViewModel::Helpers#cell
+        def cell(name, *args, &block)
+          "#{name}_cell".camelize.constantize.(*args, &block)
         end
       end
     end

@@ -9,3 +9,14 @@ Feature: Cells support for Middleman
     Given the Server is running at "non-default-dir-app"
     When I go to "/index.html"
     Then I should see "Hello from non-default directory."
+
+  Scenario: Render with helpers
+    Given the Server is running at "helpers-app"
+    When I go to "/index.html"
+    Then I should see "This is rendered by a helper."
+    When I go to "/method.html"
+    Then I should see "This is rendered by #foobar."
+    When I go to "/collection.html"
+    Then I should see "Item #1"
+    Then I should see "Item #2"
+    Then I should see "Item #3"
