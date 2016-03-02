@@ -1,5 +1,7 @@
 # Middleman::Cells
 
+[![Gem Version](https://badge.fury.io/rb/middleman-cells.svg)](https://badge.fury.io/rb/middleman-cells)
+
 [Cells](https://github.com/apotonick/cells) support for [Middleman](https://github.com/middleman/middleman).
 
 ## Usage
