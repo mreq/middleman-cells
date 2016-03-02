@@ -41,3 +41,8 @@ Feature: Cells support for Middleman
     Given the Server is running at "haml-app"
     When I go to "/index.html"
     Then I should see "<p>This is a Haml.</p>"
+
+  Scenario: Slim support
+    Given the Server is running at "slim-app"
+    When I go to "/index.html"
+    Then I should see "<p>This is a Slim.</p>"

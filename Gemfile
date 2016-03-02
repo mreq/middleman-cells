@@ -22,5 +22,6 @@ group :test do
   gem 'haml', github: 'haml/haml', ref: '7c7c169'
   gem 'cells-hamlit'
   gem 'hamlit'
+  gem 'cells-slim'
   gem 'hashie'
 end
