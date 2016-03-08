@@ -34,8 +34,19 @@ module Middleman
 
       def after_configuration
         cells_dir = File.join(app.root, app.config[:source], options.cells_dir)
+        helper_modules = app.template_context_class.included_modules
 
-        ::Cell::ViewModel.view_paths << cells_dir
+        # Extending Cell::ViewModel to adapt Middleman
+        ::Cell::ViewModel.class_eval do
+          self.view_paths << cells_dir
+
+          # Required for Padrino's helpers
+          def current_engine
+          end
+
+          # Include view helpers
+          helper_modules.each {|helper| include helper }
+        end
 
         if options.autoload
           require 'active_support/dependencies'

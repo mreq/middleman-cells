@@ -32,6 +32,20 @@ Feature: Cells support for Middleman
     When I go to "/index.html"
     Then I should see "After"
 
+  Scenario: View helpers
+    Given the Server is running at "view-helpers-app"
+    When I go to "/index.html"
+    Then I should see:
+      """
+      <a href="https://twitter.com/notozeki">Follow me</a>
+      """
+    When I go to "/render_nested_cells.html"
+    Then I should see:
+      """
+      <p>This is a parent.</p>
+      <p>This is a child.</p>
+      """
+
   Scenario: Hamlit support
     Given the Server is running at "hamlit-app"
     When I go to "/index.html"
