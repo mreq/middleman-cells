@@ -35,6 +35,7 @@ module Middleman
       def after_configuration
         cells_dir = File.join(app.root, app.config[:source], options.cells_dir)
         helper_modules = app.template_context_class.included_modules
+        app_proxy = app
 
         # Extending Cell::ViewModel to adapt Middleman
         ::Cell::ViewModel.class_eval do
@@ -46,6 +47,12 @@ module Middleman
 
           # Include view helpers
           helper_modules.each {|helper| include helper }
+
+          # Shortcut to global values on the app instance
+          globals = %i[config logger sitemap server? build? environment? data extensions root]
+          globals.each do |name|
+            define_method(name) { app_proxy.send(name) }
+          end
         end
 
         if options.autoload

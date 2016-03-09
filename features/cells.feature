@@ -45,6 +45,9 @@ Feature: Cells support for Middleman
       <p>This is a parent.</p>
       <p>This is a child.</p>
       """
+    When I go to "/app_shortcuts.html"
+    Then I should see "Awesome Site"
+    Then I should see "Middleman::Cells::Extension"
 
   Scenario: Hamlit support
     Given the Server is running at "hamlit-app"
