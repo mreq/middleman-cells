@@ -24,9 +24,8 @@ module Middleman
           # Slim::Template and it causes ArgumentError. So we re-define it here
           # to follow the convention for the nonce. This very smells...:hankey:
           ::Slim::Template.class_eval do
-            alias orig_initialize initialize
             def initialize(file=nil, line=1, options={}, &block)
-              orig_initialize(file, line, options, &block)
+              super(file, line, options, &block)
             end
           end
         end
